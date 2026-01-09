@@ -1,9 +1,9 @@
 <!doctype html>
- <html lang="ru">
+<html lang="ru">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>STONECOIN — Landing</title>
+  <title>Tired Trench Trader — Landing</title>
   <meta name="description" content="The alpha you scroll for. Contract address coming soon." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -265,36 +265,6 @@
       font-size: 12px;
     }
 
-    /* LEFT IMAGE */
-    .heroLeftImg{
-      margin-top: 14px;
-      border-radius: 22px;
-      overflow:hidden;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.02);
-      box-shadow: var(--shadow);
-      position: relative;
-    }
-    .heroLeftImg img{
-      width: 100%;
-      height: 280px;
-      object-fit: cover;
-      display:block;
-    }
-    .heroLeftImg .imgHint{
-      position:absolute;
-      left: 14px;
-      bottom: 12px;
-      padding: 8px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.35);
-      color: rgba(255,255,255,.82);
-      font-weight: 700;
-      font-size: 12px;
-      backdrop-filter: blur(10px);
-    }
-
     /* right illustration */
     .orb{
       position:relative;
@@ -503,7 +473,6 @@
       .hero{ grid-template-columns: 1fr; }
       .orb{ min-height: 360px; }
       .nav{ justify-content:flex-start; }
-      .heroLeftImg img{ height: 240px; }
     }
   </style>
 </head>
@@ -513,7 +482,7 @@
     <div class="topbar">
       <div class="brand">
         <div class="logo" aria-hidden="true"></div>
-        <h1><span>STONE</span>COIN</h1>
+        <h1>TIRED <span>TRENCH</span> TRADER</h1>
       </div>
 
       <div class="nav">
@@ -524,33 +493,28 @@
     </div>
 
     <section class="hero">
-      <!-- LEFT -->
       <div>
-        <div class="kicker"><span class="dot"></span> $STONECOIN</div>
+        <div class="kicker"><span class="dot"></span> $TTT</div>
 
         <div class="title">
           <div class="w1">STONE</div>
           <div class="w2">COIN</div>
-          <div class="w3"></div>
         </div>
 
         <p class="subtitle">
           The alpha you scroll for. Contract address coming soon.
         </p>
 
-        <!-- ТВОЯ КАРТИНКА СЛЕВА -->
-        <div class="heroLeftImg">
-          <img id="leftImg" src="./your-image.png" alt="STONECOIN image">
-          <div class="imgHint">your image</div>
-        </div>
-
-        <div class="card" style="margin-top:14px;">
+        <div class="card">
           <div class="cardLabel"><span class="bar"></span> CONTRACT ADDRESS</div>
 
           <div class="addrRow">
-            <div class="addr" id="contract">XXX</div>
+            <div class="addr" id="contract">
+              
+            </div>
 
             <button class="iconBtn" id="copyBtn" title="Copy">
+              <!-- copy icon -->
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
                 <path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="2" />
                 <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="2"/>
@@ -558,11 +522,10 @@
             </button>
           </div>
 
-          <div class="hint" id="hint">Нажми на иконку — адрес скопируется.</div>
+          <div class="hint" id="hint"></div>
         </div>
       </div>
 
-      <!-- RIGHT -->
       <div class="orb">
         <div class="mascot">
           <div class="mascotBox">
@@ -587,7 +550,7 @@
   <div class="buyBar">
     <div class="buyInner">
       <div class="buyLeft">
-        <div class="name">Buy $STONECOIN</div>
+        <div class="name">Buy $TTT</div>
         <div class="sub" id="buySub">Buy link not set — put your URL in code</div>
       </div>
 
@@ -598,11 +561,10 @@
   <script>
     // ====== НАСТРОЙКИ (меняй под себя) ======
     const CONFIG = {
-      tokenSymbol: "STONECOIN",
+      tokenSymbol: "STONE COIN",
       contract: "XXX",
-      leftImageUrl: "./your-image.png", // сюда путь к твоей картинке (например: ./img/your.png)
-      buyUrl: "https://pump.fun/",      // сюда вставь ссылку на покупку
-      xUrl: "https://x.com/stonefuncoin?s=21",
+      buyUrl: "https://pump.fun/",   // сюда вставь ссылку на покупку (pump.fun / raydium / dex / агрегатор)
+      xUrl: "https://x.com/stonefuncoin",
       tgUrl: "https://t.me/",
       dexUrl: "https://dexscreener.com/"
     };
@@ -617,10 +579,7 @@
     const tgLink = document.getElementById("tgLink");
     const dexLink = document.getElementById("dexLink");
 
-    const leftImg = document.getElementById("leftImg");
-
     contractEl.textContent = CONFIG.contract;
-
     xLink.href = CONFIG.xUrl;
     tgLink.href = CONFIG.tgUrl;
     dexLink.href = CONFIG.dexUrl;
@@ -629,8 +588,6 @@
     buySub.textContent = CONFIG.buyUrl && CONFIG.buyUrl !== "#"
       ? "Opens your buy page"
       : "Buy link not set — put your URL in code";
-
-    leftImg.src = CONFIG.leftImageUrl;
 
     // ====== copy contract ======
     document.getElementById("copyBtn").addEventListener("click", async () => {
