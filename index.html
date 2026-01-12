@@ -24,10 +24,17 @@
       --acid:#b7ff2a;
 
       --navh: 78px;
+
+      --card: rgba(255,255,255,.06);
+      --stroke: rgba(255,255,255,.12);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+      --max: 1120px;
     }
 
     *{box-sizing:border-box}
     html,body{height:100%}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -42,17 +49,17 @@
 
     a{color:inherit; text-decoration:none}
 
-    /* NAV */
+    /* NAV (locked) */
     .nav{
       position:sticky; top:0; z-index:50;
       height:var(--navh);
       backdrop-filter: blur(12px);
-      background: linear-gradient(180deg, rgba(5,11,8,.85), rgba(5,11,8,.45));
+      background: linear-gradient(180deg, rgba(5,11,8,.90), rgba(5,11,8,.55));
       border-bottom:1px solid rgba(255,255,255,.08);
     }
     .nav .row{
       height:100%;
-      max-width:1120px;
+      max-width:var(--max);
       margin:0 auto;
       padding:0 18px;
 
@@ -82,7 +89,6 @@
     .brand span{color:var(--green)}
     .brand b{font-weight:900}
 
-    /* меню по центру контейнера */
     .navlinks{
       justify-self:center;
       display:flex; align-items:center; justify-content:center;
@@ -151,7 +157,7 @@
       border:1px solid rgba(5,11,8,.12);
     }
 
-    /* HERO: фото НЕ в контейнере, прилипает ко всем краям */
+    /* HERO */
     .hero{
       width:100%;
       height: calc(100vh - var(--navh));
@@ -162,13 +168,165 @@
       width:100%;
       height:100%;
       display:block;
-      object-fit: cover;      /* заполняет всё без пустых краёв */
-      object-position: center;/* центрируем */
+      object-fit: cover;
+      object-position: center;
     }
 
-    /* адаптив */
+    /* SECTION WRAPPER */
+    .section{
+      padding: 64px 0;
+    }
+    .container{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    /* HOW TO BUY (green version of the screenshot block) */
+    .howwrap{
+      position:relative;
+      border-radius: 26px;
+      background:
+        radial-gradient(900px 520px at 15% 0%, rgba(51,255,135,.10), transparent 60%),
+        radial-gradient(900px 520px at 85% 15%, rgba(183,255,42,.10), transparent 55%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border:1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .howinner{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 22px;
+      padding: 34px;
+      align-items: center;
+    }
+
+    .howtitle{
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+      font-size: 44px;
+      line-height: 1;
+      text-shadow: 0 16px 60px rgba(0,0,0,.55);
+    }
+    .howtitle span{
+      color: rgba(234,255,242,.9);
+      background: linear-gradient(135deg, rgba(51,255,135,.95), rgba(183,255,42,.75));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    .step{
+      border-radius: 18px;
+      background: rgba(5,11,8,.40);
+      border: 1px solid rgba(255,255,255,.10);
+      padding: 14px 14px 13px;
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      position:relative;
+      overflow:hidden;
+    }
+    .step:before{
+      content:"";
+      position:absolute;
+      inset:-40px -60px auto auto;
+      width:140px; height:140px;
+      background: radial-gradient(circle at 30% 30%, rgba(51,255,135,.18), transparent 65%);
+      transform: rotate(12deg);
+      pointer-events:none;
+    }
+    .step h3{
+      margin:0 0 6px;
+      font-size: 13px;
+      letter-spacing:.10em;
+      text-transform: uppercase;
+      font-weight: 900;
+      color: rgba(234,255,242,.92);
+    }
+    .step p{
+      margin:0;
+      font-size: 12.5px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+    .num{
+      display:inline-grid;
+      place-items:center;
+      width: 26px; height: 26px;
+      border-radius: 10px;
+      margin-right: 8px;
+      background: linear-gradient(135deg, rgba(51,255,135,.95), rgba(183,255,42,.70));
+      color:#04150c;
+      font-weight: 900;
+      font-size: 12px;
+      border:1px solid rgba(0,0,0,.10);
+      box-shadow: 0 14px 40px rgba(0,0,0,.25);
+    }
+
+    .art{
+      border-radius: 22px;
+      min-height: 420px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(350px 260px at 70% 35%, rgba(51,255,135,.18), transparent 65%),
+        radial-gradient(420px 320px at 30% 70%, rgba(183,255,42,.14), transparent 60%),
+        linear-gradient(180deg, rgba(5,11,8,.25), rgba(5,11,8,.55));
+      box-shadow: 0 18px 55px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      place-items:center;
+    }
+    .art img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    /* tiny caption if no image */
+    .art .placeholder{
+      padding: 14px 16px;
+      border-radius: 16px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(234,255,242,.85);
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      font-size: 12px;
+    }
+
+    /* optional: anchor offset so headings aren't hidden by sticky nav */
+    .anchor{
+      position:relative;
+    }
+    .anchor:before{
+      content:"";
+      display:block;
+      height: calc(var(--navh) + 14px);
+      margin-top: calc((var(--navh) + 14px) * -1);
+    }
+
     @media (max-width: 980px){
       .navlinks{display:none}
+      .howinner{grid-template-columns: 1fr}
+      .art{min-height: 320px}
+      .howtitle{font-size: 38px}
+    }
+    @media (max-width: 560px){
+      .steps{grid-template-columns: 1fr}
+      .howtitle{font-size: 34px}
+      .howinner{padding: 22px}
     }
   </style>
 </head>
@@ -214,10 +372,67 @@
     </div>
   </header>
 
-  <!-- одна фотка на всю ширину/высоту -->
+  <!-- main image full width/height -->
   <main class="hero">
     <img src="hero.jpg" alt="$PEPES main image">
   </main>
+
+  <!-- (kept for menu anchors; you can fill later) -->
+  <section id="about" class="section anchor">
+    <div class="container"></div>
+  </section>
+
+  <section id="tokenomics" class="section anchor">
+    <div class="container"></div>
+  </section>
+
+  <!-- ADDED: scroll down -> How To Buy block (green style) -->
+  <section id="how" class="section anchor">
+    <div class="container">
+      <div class="howwrap">
+        <div class="howinner">
+          <div>
+            <h2 class="howtitle"><span>HOW TO BUY</span></h2>
+
+            <div class="steps">
+              <div class="step">
+                <h3><span class="num">1</span>Create a Wallet</h3>
+                <p>Install Phantom (or any Solana wallet) and create your Solana wallet.</p>
+              </div>
+
+              <div class="step">
+                <h3><span class="num">2</span>Get Some SOL</h3>
+                <p>Buy SOL on an exchange and send it to your wallet address.</p>
+              </div>
+
+              <div class="step">
+                <h3><span class="num">3</span>Go to pump.fun</h3>
+                <p>Open pump.fun and connect your wallet.</p>
+              </div>
+
+              <div class="step">
+                <h3><span class="num">4</span>Swap and HODL</h3>
+                <p>Swap SOL for $PEPES and hold tight. Contract: <b>XXX</b>.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Put your right-side illustration here -->
+          <div class="art">
+            <!-- Option A: use an image (recommended). Put file next to index.html -->
+            <!-- <img src="howto.jpg" alt="How to buy illustration"> -->
+
+            <!-- Option B: placeholder (remove after you add the image) -->
+            <div class="placeholder">PLACE YOUR IMAGE: howto.jpg</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="join" class="section anchor">
+    <div class="container"></div>
+  </section>
 
 </body>
 </html>
