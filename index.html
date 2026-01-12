@@ -3,485 +3,793 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="theme-color" content="#0b2b16" />
-  <title>$PEPES — Green Pepe Crypto</title>
-  <meta name="description" content="$PEPES — зелёная мем-крипта в стиле Пепе. Join the pond." />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+  <title>$PEPES — Green Pepe Coin</title>
+  <meta name="description" content="$PEPES — зеленый мемкоин. Join the pond." />
 
   <style>
     :root{
-      --bg0:#06170d;
-      --bg1:#081e11;
+      --bg0:#050b08;
+      --bg1:#07110c;
+      --bg2:#0a1a12;
       --card: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.10);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
+      --stroke: rgba(255,255,255,.12);
 
-      --green:#56ff8a;
-      --green2:#20d76d;
-      --lime:#b7ff4a;
+      --green:#33ff87;
+      --green2:#14c766;
+      --acid:#b7ff2a;
 
-      --shadow: 0 18px 50px rgba(0,0,0,.45);
-      --radius: 22px;
+      --text:#eafff2;
+      --muted: rgba(234,255,242,.72);
+
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+
+      --max: 1120px;
+      --navh: 78px;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{
       margin:0;
-      color:var(--text);
-      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+      color: var(--text);
       background:
-        radial-gradient(1000px 600px at 20% 10%, rgba(86,255,138,.16), transparent 60%),
-        radial-gradient(900px 650px at 80% 30%, rgba(183,255,74,.12), transparent 60%),
-        radial-gradient(1200px 900px at 50% 90%, rgba(32,215,109,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg0), var(--bg1));
+        radial-gradient(900px 600px at 20% 15%, rgba(51,255,135,.12), transparent 55%),
+        radial-gradient(900px 600px at 75% 35%, rgba(183,255,42,.10), transparent 58%),
+        radial-gradient(900px 600px at 55% 85%, rgba(20,199,102,.10), transparent 58%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 35%, var(--bg2));
       overflow-x:hidden;
     }
 
-    .noise{
-      pointer-events:none;
-      position:fixed;
-      inset:0;
-      opacity:.09;
-      mix-blend-mode:overlay;
-      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
-      background-size:220px 220px;
-    }
+    a{color:inherit; text-decoration:none}
+    .wrap{max-width:var(--max); margin:0 auto; padding:0 20px}
 
-    a{ color:inherit; text-decoration:none; }
-    .wrap{ max-width:1120px; margin:0 auto; padding:26px 18px 80px; }
-
+    /* ===== NAV ===== */
     .nav{
+      position:fixed; inset:0 0 auto 0; height:var(--navh);
+      z-index:50;
+      background: rgba(5,11,8,.45);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+    .nav .inner{
+      height:100%;
       display:flex; align-items:center; justify-content:space-between;
       gap:14px;
-      position:sticky; top:0;
-      padding:14px 0;
-      backdrop-filter: blur(10px);
-      z-index:10;
     }
-    .nav::before{
+    .brand{
+      display:flex; align-items:center; gap:10px; min-width: 160px;
+      font-weight:900; letter-spacing:.06em;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:12px;
+      background:
+        radial-gradient(14px 14px at 30% 30%, rgba(255,255,255,.32), transparent 60%),
+        linear-gradient(135deg, rgba(51,255,135,.95), rgba(183,255,42,.85));
+      box-shadow: 0 14px 35px rgba(20,199,102,.18);
+      border: 1px solid rgba(255,255,255,.14);
+      display:grid; place-items:center;
+      position:relative; overflow:hidden;
+    }
+    .logo:after{
       content:"";
-      position:absolute;
-      inset:-12px -18px;
-      background:linear-gradient(180deg, rgba(6,23,13,.88), rgba(6,23,13,.55), transparent);
-      border-bottom:1px solid rgba(255,255,255,.06);
-      z-index:-1;
+      position:absolute; inset:-40%;
+      background: conic-gradient(from 180deg, transparent, rgba(255,255,255,.22), transparent);
+      animation: spin 6s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
+    .logo span{
+      position:relative; z-index:2;
+      font-weight:1000; font-size:14px;
+      color:#042412;
+      text-shadow: none;
     }
 
-    .brand{
+    .menu{
+      display:flex; align-items:center; justify-content:center;
+      gap:22px;
+      flex: 1;
+    }
+    .menu a{
+      font-weight:900;
+      letter-spacing:.10em;
+      font-size:12px;
+      text-transform:uppercase;
+      opacity:.9;
+      padding:10px 10px;
+      border-radius: 12px;
+      transition: .18s ease;
+    }
+    .menu a:hover{
+      background: rgba(255,255,255,.06);
+      opacity:1;
+      transform: translateY(-1px);
+    }
+
+    .actions{
       display:flex; align-items:center; gap:10px;
-      font-weight:900; letter-spacing:.6px;
+      min-width: 220px; justify-content:flex-end;
+    }
+    .iconBtn{
+      width:42px; height:42px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      display:grid; place-items:center;
+      transition: .18s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+    }
+    .iconBtn:hover{
+      transform: translateY(-2px);
+      background: rgba(51,255,135,.12);
+      border-color: rgba(51,255,135,.35);
+    }
+    .btn{
+      height:42px;
+      padding:0 16px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background:
+        radial-gradient(16px 16px at 25% 30%, rgba(255,255,255,.22), transparent 60%),
+        linear-gradient(135deg, rgba(51,255,135,.95), rgba(183,255,42,.78));
+      color:#042412;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:12px;
+      display:inline-flex; align-items:center; gap:10px;
+      box-shadow: 0 18px 55px rgba(20,199,102,.22);
+      transition:.18s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{transform: translateY(-2px); filter:saturate(1.05)}
+
+    .burger{display:none}
+
+    /* ===== HERO ===== */
+    .hero{
+      padding-top: calc(var(--navh) + 26px);
+      padding-bottom: 36px;
+      position:relative;
+    }
+    .heroGrid{
+      display:grid;
+      grid-template-columns: 1.25fr .75fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .heroCard{
+      border-radius: calc(var(--radius) + 8px);
+      overflow:hidden;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(900px 500px at 35% 10%, rgba(51,255,135,.22), transparent 55%),
+        radial-gradient(700px 500px at 80% 40%, rgba(183,255,42,.18), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow: var(--shadow);
+      position:relative;
+      min-height: 470px;
+    }
+
+    /* big title like in screenshot */
+    .bannerTop{
+      position:absolute;
+      left: 18px; right:18px; top: 18px;
+      padding: 14px 14px 10px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.22);
+      border: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .bigTitle{
+      margin:0;
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size: clamp(28px, 5.4vw, 56px);
+      line-height:1;
+      color: rgba(255,255,255,.95);
+      text-shadow:
+        0 2px 0 rgba(0,0,0,.35),
+        0 18px 55px rgba(0,0,0,.45);
+      position:relative;
+    }
+    .bigTitle .shine{
+      background: linear-gradient(90deg, rgba(255,255,255,.55), rgba(51,255,135,.95), rgba(183,255,42,.85));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color: transparent;
+    }
+
+    .heroStage{
+      position:absolute;
+      inset: 86px 18px 18px 18px;
+      border-radius: 20px;
+      background:
+        radial-gradient(18px 18px at 20% 30%, rgba(255,255,255,.12), transparent 60%),
+        radial-gradient(18px 18px at 70% 55%, rgba(255,255,255,.10), transparent 62%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.35));
+      border: 1px solid rgba(255,255,255,.10);
+      overflow:hidden;
+    }
+
+    /* faux “poster” scene */
+    .scene{
+      position:absolute; inset:0;
+      background:
+        /* stars */
+        radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.20), transparent 55%),
+        radial-gradient(1px 1px at 24% 42%, rgba(255,255,255,.18), transparent 55%),
+        radial-gradient(1px 1px at 73% 22%, rgba(255,255,255,.18), transparent 55%),
+        radial-gradient(1px 1px at 83% 58%, rgba(255,255,255,.16), transparent 55%),
+        /* light */
+        radial-gradient(520px 260px at 55% 24%, rgba(51,255,135,.22), transparent 60%),
+        radial-gradient(520px 260px at 50% 90%, rgba(183,255,42,.12), transparent 60%),
+        /* base */
+        linear-gradient(180deg, rgba(10,40,25,.55), rgba(2,10,6,.75));
+    }
+
+    /* center image placeholder you will replace */
+    .pepeHolder{
+      position:absolute;
+      left:50%; top:52%;
+      transform: translate(-50%,-50%);
+      width:min(360px, 62%);
+      aspect-ratio: 1 / 1;
+      border-radius: 30px;
+      border: 1px dashed rgba(255,255,255,.18);
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.10), transparent 62%),
+        linear-gradient(135deg, rgba(51,255,135,.15), rgba(183,255,42,.08));
+      display:grid;
+      place-items:center;
+      box-shadow: 0 28px 90px rgba(0,0,0,.55);
+      overflow:hidden;
+    }
+    .pepeHolder img{
+      width:100%; height:100%;
+      object-fit: cover;
+      display:block;
+      opacity: .92;
+      filter: drop-shadow(0 22px 40px rgba(0,0,0,.55));
+    }
+    .pepeHint{
+      position:absolute;
+      inset:auto 18px 18px 18px;
+      padding:12px 14px;
+      border-radius: 16px;
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.10);
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
+    }
+    .pepeHint .left{
+      display:flex; flex-direction:column; gap:4px;
+      min-width: 0;
+    }
+    .kicker{
+      font-weight:1000;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:11px;
+      color: rgba(183,255,42,.92);
+    }
+    .sub{
+      font-size:13px;
+      color: var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+    }
+    .miniRow{display:flex; gap:8px; align-items:center}
+    .pill{
+      padding:8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.04em;
+      color: rgba(255,255,255,.88);
+    }
+
+    /* right side panel */
+    .side{
+      display:flex;
+      flex-direction:column;
+      gap: 14px;
+    }
+    .panel{
+      border-radius: calc(var(--radius) + 6px);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 60px rgba(0,0,0,.35);
+      overflow:hidden;
+    }
+    .panel .pad{padding:16px}
+    .panel h3{
+      margin:0 0 8px 0;
+      font-size: 14px;
+      font-weight:1000;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+    }
+    .panel p{margin:0; color:var(--muted); font-size:13px; line-height:1.55}
+    .stats{
+      display:grid; grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    .stat{
+      padding:12px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.10), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+    }
+    .stat .t{font-size:11px; color:rgba(234,255,242,.65); letter-spacing:.10em; text-transform:uppercase; font-weight:900}
+    .stat .v{margin-top:6px; font-size:16px; font-weight:1000}
+    .divider{height:1px; background: rgba(255,255,255,.10)}
+
+    .ctaRow{
+      display:flex; gap:10px; flex-wrap:wrap;
+      margin-top: 12px;
+    }
+    .btnGhost{
+      height:42px;
+      padding:0 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(234,255,242,.92);
+      font-weight:1000;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:12px;
+      display:inline-flex; align-items:center; gap:10px;
+      transition:.18s ease;
+    }
+    .btnGhost:hover{
+      transform: translateY(-2px);
+      border-color: rgba(51,255,135,.35);
+      background: rgba(51,255,135,.10);
+    }
+
+    /* ===== SECTIONS ===== */
+    section{
+      padding: 26px 0;
+      scroll-margin-top: calc(var(--navh) + 14px);
+    }
+    .secHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:16px;
+      margin: 10px 0 14px;
+    }
+    .secHead h2{
+      margin:0;
+      font-weight:1000;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 18px;
+    }
+    .secHead .note{
+      margin:0;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 520px;
+    }
+
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .card{
+      border-radius: calc(var(--radius) + 6px);
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.10), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+      padding: 16px;
+      min-height: 150px;
+    }
+    .card .cap{
+      display:flex; align-items:center; gap:10px;
+      font-weight:1000;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size: 12px;
+      margin-bottom: 10px;
     }
     .dot{
-      width:12px; height:12px; border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, var(--lime), var(--green2));
-      box-shadow: 0 0 0 6px rgba(86,255,138,.10);
+      width:10px; height:10px; border-radius:999px;
+      background: linear-gradient(135deg, var(--green), var(--acid));
+      box-shadow: 0 0 0 6px rgba(51,255,135,.10);
     }
+    .card p{margin:0; color: var(--muted); font-size: 13px; line-height:1.6}
 
-    .pill-row{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
-    .pill{
-      display:inline-flex; align-items:center; gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--stroke);
-      background: rgba(255,255,255,.04);
-      box-shadow: 0 10px 30px rgba(0,0,0,.18);
-      transition: transform .15s ease, background .15s ease, border-color .15s ease;
-      user-select:none;
-    }
-    .pill:hover{
-      transform: translateY(-1px);
-      border-color: rgba(86,255,138,.34);
-      background: rgba(86,255,138,.08);
-    }
-    .pill svg{ width:16px; height:16px; opacity:.9; }
-
-    .hero{
-      margin-top:20px;
+    .howGrid{
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap:22px;
-      align-items:stretch;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
-    @media (max-width: 980px){
-      .hero{ grid-template-columns:1fr; }
-      .pill-row{ justify-content:flex-start; }
+    .step{
+      padding:16px;
+      border-radius: calc(var(--radius) + 6px);
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 18px 60px rgba(0,0,0,.28);
+      display:flex; gap:12px;
+      align-items:flex-start;
     }
+    .num{
+      width:38px; height:38px; border-radius: 14px;
+      background: linear-gradient(135deg, rgba(51,255,135,.95), rgba(183,255,42,.78));
+      color:#042412;
+      font-weight:1000;
+      display:grid; place-items:center;
+      flex: 0 0 auto;
+      box-shadow: 0 18px 55px rgba(20,199,102,.22);
+    }
+    .step h4{margin:2px 0 6px 0; font-size:14px; letter-spacing:.06em; text-transform:uppercase}
+    .step p{margin:0; color:var(--muted); font-size:13px; line-height:1.6}
 
-    .card{
-      border:1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
-      border-radius: var(--radius);
+    .joinBox{
+      border-radius: calc(var(--radius) + 10px);
+      border: 1px solid rgba(255,255,255,.10);
+      background:
+        radial-gradient(700px 340px at 20% 20%, rgba(51,255,135,.18), transparent 60%),
+        radial-gradient(700px 340px at 80% 60%, rgba(183,255,42,.12), transparent 60%),
+        rgba(255,255,255,.03);
       box-shadow: var(--shadow);
       overflow:hidden;
       position:relative;
     }
-    .card::after{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background: radial-gradient(520px 260px at 30% 20%, rgba(86,255,138,.18), transparent 60%),
-                  radial-gradient(520px 260px at 70% 60%, rgba(183,255,74,.10), transparent 60%);
-      pointer-events:none;
-      mask: linear-gradient(#000, transparent 70%);
+    .joinInner{
+      padding: 18px;
+      display:flex;
+      gap: 18px;
+      align-items:center;
+      justify-content:space-between;
+      flex-wrap: wrap;
     }
-
-    .left{
-      padding:26px 22px;
-    }
-
-    .tag{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      background: rgba(86,255,138,.10);
-      border:1px solid rgba(86,255,138,.24);
-      color: rgba(255,255,255,.92);
-      font-weight:700;
-      width:fit-content;
-    }
-    .tag small{ color: rgba(255,255,255,.78); font-weight:600; }
-
-    h1{
-      margin:14px 0 10px;
-      font-size: clamp(38px, 5.2vw, 64px);
-      line-height:1.02;
-      letter-spacing:-1.2px;
-    }
-    .grad{
-      background: linear-gradient(90deg, #e8ffe9, var(--lime), var(--green));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .sub{
+    .joinInner h2{
       margin:0;
-      font-size: clamp(15px, 1.6vw, 18px);
-      line-height:1.55;
+      font-size: 22px;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-weight:1000;
+    }
+    .joinInner p{
+      margin:6px 0 0;
       color: var(--muted);
-      max-width: 54ch;
+      font-size: 13px;
+      max-width: 520px;
     }
 
-    .cta{
-      margin-top:18px;
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      align-items:center;
+    footer{
+      padding: 26px 0 40px;
+      color: rgba(234,255,242,.62);
+      font-size: 12px;
+    }
+    .footRow{
+      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 16px;
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      padding:12px 16px;
-      border-radius:14px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.04);
-      color: rgba(255,255,255,.92);
-      font-weight:800;
-      transition: transform .15s ease, border-color .15s ease, background .15s ease;
-      user-select:none;
-    }
-    .btn:hover{
-      transform: translateY(-1px);
-      border-color: rgba(86,255,138,.38);
-      background: rgba(86,255,138,.10);
-    }
-    .btn.primary{
-      border-color: rgba(86,255,138,.34);
-      background: linear-gradient(180deg, rgba(86,255,138,.20), rgba(86,255,138,.06));
-    }
-    .btn svg{ width:18px; height:18px; opacity:.95; }
-
-    .statgrid{
-      margin-top:18px;
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap:12px;
-    }
-    @media (max-width: 520px){
-      .statgrid{ grid-template-columns:1fr; }
-    }
-    .stat{
-      padding:14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.14);
-    }
-    .stat b{
-      display:block;
-      font-size:18px;
-      letter-spacing:.2px;
-    }
-    .stat span{
-      display:block;
-      color: rgba(255,255,255,.72);
-      margin-top:6px;
-      font-size:13px;
-      line-height:1.3;
-    }
-
-    .right{
-      display:flex;
-      flex-direction:column;
-    }
-    .art{
-      position:relative;
-      padding:18px;
-      height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      min-height: 420px;
-      background:
-        radial-gradient(600px 420px at 50% 45%, rgba(0,0,0,.22), transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.06));
-    }
-    .pepe{
-      width:100%;
-      max-width: 560px;
-      height:auto;
-      display:block;
-      border-radius: 18px;
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 22px 70px rgba(0,0,0,.55);
-      transform: translateZ(0);
-    }
-    .glow{
-      position:absolute;
-      inset:auto 10% 8% 10%;
-      height: 110px;
-      background: radial-gradient(closest-side, rgba(86,255,138,.34), transparent);
-      filter: blur(18px);
-      opacity:.9;
-      pointer-events:none;
-    }
-
-    .section{
-      margin-top:20px;
-      display:grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap:14px;
-    }
+    /* ===== RESPONSIVE ===== */
     @media (max-width: 980px){
-      .section{ grid-template-columns:1fr; }
-    }
-    .mini{
-      padding:18px;
-    }
-    .mini h3{
-      margin:0 0 8px;
-      font-size:16px;
-      letter-spacing:.2px;
-    }
-    .mini p{
-      margin:0;
-      color: rgba(255,255,255,.74);
-      line-height:1.55;
-      font-size:14px;
-    }
-
-    .footer{
-      margin-top:22px;
-      padding:18px;
-      text-align:center;
-      color: rgba(255,255,255,.62);
-      border:1px solid rgba(255,255,255,.08);
-      border-radius: var(--radius);
-      background: rgba(255,255,255,.03);
-    }
-    .footer a{
-      color: rgba(255,255,255,.88);
-      border-bottom:1px dashed rgba(86,255,138,.35);
-    }
-
-    .toast{
-      position: fixed;
-      left: 50%;
-      bottom: 22px;
-      transform: translateX(-50%);
-      background: rgba(0,0,0,.65);
-      border: 1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.92);
-      padding: 10px 14px;
-      border-radius: 999px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
-      opacity: 0;
-      pointer-events:none;
-      transition: opacity .18s ease, transform .18s ease;
-      font-weight: 700;
-      letter-spacing:.2px;
-    }
-    .toast.show{
-      opacity: 1;
-      transform: translateX(-50%) translateY(-2px);
+      .heroGrid{grid-template-columns: 1fr; }
+      .actions{min-width:auto}
+      .menu{display:none}
+      .burger{display:inline-flex}
+      .grid3{grid-template-columns: 1fr}
+      .howGrid{grid-template-columns: 1fr}
     }
   </style>
 </head>
 
 <body>
-  <div class="noise"></div>
+  <!-- NAV -->
+  <header class="nav">
+    <div class="wrap inner">
+      <a class="brand" href="#top">
+        <div class="logo" aria-hidden="true"><span>PE</span></div>
+        <div>$PEPES</div>
+      </a>
 
-  <div class="wrap">
-    <header class="nav">
-      <div class="brand">
-        <span class="dot"></span>
-        <span>$PEPES</span>
-      </div>
+      <nav class="menu" aria-label="Primary">
+        <a href="#about">ABOUT</a>
+        <a href="#tokenomics">TOKENOMICS</a>
+        <a href="#how">HOW TO BUY</a>
+        <a href="#join">JOIN</a>
+      </nav>
 
-      <div class="pill-row">
-        <a class="pill" href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M15.2 2H18l-6.2 7.1L19.6 22h-6.1l-4.8-7.1L2.8 22H0l6.9-7.9L-0.4 2h6.2l4.3 6.3L15.2 2Z" fill="currentColor" opacity=".9"/>
+      <div class="actions">
+        <a class="iconBtn" href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener" aria-label="X">
+          <!-- X icon -->
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M18.7 2H22l-7.2 8.2L23.2 22H16l-5.5-6.8L4.6 22H1.3l7.7-8.8L.8 2H8l5 6.2L18.7 2Z" fill="currentColor"/>
           </svg>
-          <span>X</span>
         </a>
 
-        <button class="pill" id="copyBtn" type="button" title="Скопировать контракт">
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
-            <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="2" opacity=".9"/>
+        <!-- Telegram placeholder (оставил, как в примере) -->
+        <a class="iconBtn" href="#" aria-label="Telegram (set link)">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M21.7 4.3c.5-2-1.3-3.3-3-2.7L3.9 7.6c-2 .8-2 3.5 0 4.2l3.9 1.3 1.5 4.7c.6 1.9 3.2 2.4 4.5.8l2.6-3.2 4.1 3c1.5 1.1 3.6.3 4-1.6l-2.8-12.5ZM9.4 12.6l9.4-6.3-7.9 7.6-.3 3.4-1.2-3.8Z" fill="currentColor"/>
           </svg>
-          <span id="caText">CA: soon</span>
-        </button>
+        </a>
+
+        <a class="btn" href="#how">
+          BUY NOW
+          <span aria-hidden="true">→</span>
+        </a>
+
+        <a class="iconBtn burger" href="#menu" aria-label="Menu">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </a>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main class="hero">
-      <section class="card left">
-        <div class="tag">
-          <span>🐸</span>
-          <small>Green. Meme. Crypto.</small>
+  <!-- HERO -->
+  <main id="top" class="hero">
+    <div class="wrap heroGrid">
+      <div class="heroCard">
+        <div class="bannerTop">
+          <h1 class="bigTitle"><span class="shine">PEPES</span></h1>
         </div>
 
-        <h1><span class="grad">$PEPES</span><br/>король зелёного болота</h1>
-        <p class="sub">
-          Мем-токен с вайбом Пепе: зелёный стиль, чистый флекс и максимум внимания в X.
-          Никаких лишних слов — только зелёная энергия.
-        </p>
+        <div class="heroStage">
+          <div class="scene" aria-hidden="true"></div>
 
-        <div class="cta">
-          <a class="btn primary" href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M15.2 2H18l-6.2 7.1L19.6 22h-6.1l-4.8-7.1L2.8 22H0l6.9-7.9L-0.4 2h6.2l4.3 6.3L15.2 2Z" fill="currentColor" opacity=".95"/>
-            </svg>
-            <span>Follow в X</span>
-          </a>
-
-          <a class="btn" href="#about">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M12 22s8-4 8-10V7l-8-4-8 4v5c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
-              <path d="M9.5 12.2 11 13.7 14.8 9.9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
-            </svg>
-            <span>Про токен</span>
-          </a>
-
-          <button class="btn" type="button" id="copyBtn2">
-            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
-              <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="2" opacity=".9"/>
-            </svg>
-            <span>Скопировать CA</span>
-          </button>
-        </div>
-
-        <div class="statgrid">
-          <div class="stat">
-            <b>🐸 Pepe-style</b>
-            <span>зелёная эстетика, жирный мем-вайб</span>
+          <!-- PLACEHOLDER: сюда вставишь свою PEPE-картинку -->
+          <!-- Замени src на свою: например "pepe.png" рядом с index.html -->
+          <div class="pepeHolder" title="Вставь PEPE по центру">
+            <img id="heroPepe" src="" alt="" />
           </div>
-          <div class="stat">
-            <b>⚡ Fast hype</b>
-            <span>акцент на комьюнити и X-движ</span>
-          </div>
-          <div class="stat">
-            <b>🟢 Green mode</b>
-            <span>сайт/визуал в одной теме: зелёный</span>
+
+          <div class="pepeHint">
+            <div class="left">
+              <div class="kicker">$PEPES • GREEN ERA</div>
+              <div class="sub">Поставь свою PEPE-картинку в src у #heroPepe (или оставь пустым — рамка останется)</div>
+            </div>
+            <div class="miniRow">
+              <span class="pill">0% TAX</span>
+              <span class="pill">MEME</span>
+              <span class="pill">GREEN</span>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      <aside class="card right">
-        <div class="art">
-          <!-- ВАЖНО:
-               Положи твою основную картинку в репо рядом с index.html и назови "hero.jpg"
-               либо поменяй src ниже на имя файла. -->
-          <img class="pepe" src="hero.jpg" alt="$PEPES main art" />
-          <div class="glow"></div>
+      <aside class="side">
+        <div class="panel">
+          <div class="pad">
+            <h3>MISSION</h3>
+            <p>
+              $PEPES — зеленый движ. Быстро, дерзко, мемно. Никакой воды — только памп вайб и комьюнити.
+            </p>
+
+            <div class="stats">
+              <div class="stat">
+                <div class="t">Ticker</div>
+                <div class="v">$PEPES</div>
+              </div>
+              <div class="stat">
+                <div class="t">Network</div>
+                <div class="v">—</div>
+              </div>
+              <div class="stat">
+                <div class="t">Supply</div>
+                <div class="v">TBA</div>
+              </div>
+              <div class="stat">
+                <div class="t">Contract</div>
+                <div class="v">TBA</div>
+              </div>
+            </div>
+
+            <div class="ctaRow">
+              <a class="btnGhost" href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener">
+                X / TWITTER
+              </a>
+              <a class="btnGhost" href="#tokenomics">TOKENOMICS</a>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="pad">
+            <p style="margin:0; font-size:12px; color:rgba(234,255,242,.62)">
+              Tip: хочешь “как на примере” — просто поставь PEPE PNG по центру и оставь остальное.
+            </p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="pad">
+            <h3>QUICK LINKS</h3>
+            <p>Секция-быстрый доступ.</p>
+            <div class="ctaRow">
+              <a class="btnGhost" href="#about">ABOUT</a>
+              <a class="btnGhost" href="#how">HOW TO BUY</a>
+              <a class="btnGhost" href="#join">JOIN</a>
+            </div>
+          </div>
         </div>
       </aside>
-    </main>
+    </div>
+  </main>
 
-    <section class="section" id="about">
-      <div class="card mini">
-        <h3>🧪 Миссия</h3>
-        <p>Сделать самый зелёный мем-токен, который хочется репостить, держать и шить в сердце.</p>
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap">
+      <div class="secHead">
+        <h2>ABOUT</h2>
+        <p class="note">Зеленый стиль, жирный заголовок, мемная подача — как в примере, только $PEPES.</p>
       </div>
-      <div class="card mini">
-        <h3>🧩 Комьюнити</h3>
-        <p>Вся сила — в людях. Движ, мемы, рейды и поддержка в X — это наш мотор.</p>
-      </div>
-      <div class="card mini">
-        <h3>🟩 Стиль</h3>
-        <p>Пепе-эстетика, мягкая «ручная» графика, зелёный свет и жирный визуал на первом экране.</p>
-      </div>
-    </section>
 
-    <footer class="footer">
-      <div>
-        <span>Официальный X: </span>
-        <a href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener">@pepescoinfun</a>
+      <div class="grid3">
+        <div class="card">
+          <div class="cap"><span class="dot"></span>What is $PEPES?</div>
+          <p>
+            Мемкоин, который не притворяется “революцией”. Это культурка, комьюнити и зеленый вайб.
+          </p>
+        </div>
+        <div class="card">
+          <div class="cap"><span class="dot"></span>Why green?</div>
+          <p>
+            Потому что PEPE. Потому что “лягушачий режим”. Потому что это сразу читается глазами.
+          </p>
+        </div>
+        <div class="card">
+          <div class="cap"><span class="dot"></span>Community first</div>
+          <p>
+            Токен живет от движухи: мемы, рейды, шилки, посты — все решает толпа.
+          </p>
+        </div>
       </div>
-      <div style="margin-top:10px; font-size:12.5px; opacity:.85;">
-        $PEPES — мем-токен. Не является финансовым советом.
-      </div>
-    </footer>
-  </div>
+    </div>
+  </section>
 
-  <div class="toast" id="toast">Скопировано ✅</div>
+  <!-- TOKENOMICS -->
+  <section id="tokenomics">
+    <div class="wrap">
+      <div class="secHead">
+        <h2>TOKENOMICS</h2>
+        <p class="note">Заполни реальные цифры — тут уже красиво сверстано.</p>
+      </div>
+
+      <div class="grid3">
+        <div class="card">
+          <div class="cap"><span class="dot"></span>Tax</div>
+          <p><b style="color:rgba(234,255,242,.92)">0%</b> buy / <b style="color:rgba(234,255,242,.92)">0%</b> sell (если у тебя так).</p>
+        </div>
+        <div class="card">
+          <div class="cap"><span class="dot"></span>Total Supply</div>
+          <p><b style="color:rgba(234,255,242,.92)">TBA</b> — укажи supply.</p>
+        </div>
+        <div class="card">
+          <div class="cap"><span class="dot"></span>Liquidity</div>
+          <p>LP: <b style="color:rgba(234,255,242,.92)">TBA</b> • Lock/Burn: <b style="color:rgba(234,255,242,.92)">TBA</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW TO BUY -->
+  <section id="how">
+    <div class="wrap">
+      <div class="secHead">
+        <h2>HOW TO BUY</h2>
+        <p class="note">Универсальные шаги. Подставь сеть/биржу/ссылки, если надо.</p>
+      </div>
+
+      <div class="howGrid">
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <h4>Get a wallet</h4>
+            <p>Поставь кошелек (например, Phantom/MetaMask — зависит от сети). Пополни нативной монетой на комиссию.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <h4>Open a DEX</h4>
+            <p>Открой DEX (Raydium/Uniswap и т.д.). Подключи кошелек.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <h4>Paste contract</h4>
+            <p>Вставь контракт: <b style="color:rgba(234,255,242,.92)">TBA</b>. Проверь тикер <b>$PEPES</b>.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">4</div>
+          <div>
+            <h4>Swap & join</h4>
+            <p>Свапни и заходи в комьюнити. Следи за новостями в X.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JOIN -->
+  <section id="join">
+    <div class="wrap">
+      <div class="joinBox">
+        <div class="joinInner">
+          <div>
+            <h2>JOIN US</h2>
+            <p>Подписывайся, чтобы не пропускать апдейты, мемы и движ по $PEPES.</p>
+          </div>
+          <div class="ctaRow" style="margin:0">
+            <a class="btn" href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener">
+              FOLLOW ON X <span aria-hidden="true">→</span>
+            </a>
+            <a class="btnGhost" href="#top">BACK TO TOP</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap footRow">
+      <div>© <span id="y"></span> $PEPES. All memes reserved.</div>
+      <div style="opacity:.9">X: <a href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener" style="text-decoration:underline">pepescoinfun</a></div>
+    </div>
+  </footer>
 
   <script>
-    // Поставь сюда контракт, когда будет:
-    const CONTRACT_ADDRESS = "SOON";
+    // year
+    document.getElementById('y').textContent = new Date().getFullYear();
 
-    const toast = document.getElementById("toast");
-    const caText = document.getElementById("caText");
+    // If hero image src is empty, show placeholder text inside the frame
+    (function(){
+      const img = document.getElementById('heroPepe');
+      const holder = img.closest('.pepeHolder');
 
-    function showToast(msg){
-      toast.textContent = msg;
-      toast.classList.add("show");
-      window.clearTimeout(showToast._t);
-      showToast._t = window.setTimeout(()=>toast.classList.remove("show"), 1200);
-    }
-
-    function copyCA(){
-      const text = CONTRACT_ADDRESS;
-      if (!text || text === "SOON") {
-        showToast("CA ещё не добавлен");
-        return;
+      function render(){
+        if(!img.getAttribute('src')){
+          img.style.display = 'none';
+          if(!holder.querySelector('.phText')){
+            const t = document.createElement('div');
+            t.className = 'phText';
+            t.style.position = 'absolute';
+            t.style.inset = '0';
+            t.style.display = 'grid';
+            t.style.placeItems = 'center';
+            t.style.padding = '18px';
+            t.style.textAlign = 'center';
+            t.style.color = 'rgba(234,255,242,.78)';
+            t.style.fontWeight = '900';
+            t.style.letterSpacing = '.06em';
+            t.style.textTransform = 'uppercase';
+            t.style.fontSize = '12px';
+            t.innerHTML = 'PLACE YOUR PEPE IMAGE<br><span style="opacity:.75; font-weight:800; letter-spacing:.08em">set src for #heroPepe</span>';
+            holder.appendChild(t);
+          }
+        }else{
+          img.style.display = 'block';
+          const t = holder.querySelector('.phText');
+          if(t) t.remove();
+        }
       }
-      navigator.clipboard.writeText(text)
-        .then(()=>showToast("Скопировано ✅"))
-        .catch(()=>showToast("Не удалось скопировать"));
-    }
 
-    document.getElementById("copyBtn").addEventListener("click", copyCA);
-    document.getElementById("copyBtn2").addEventListener("click", copyCA);
-
-    // UI: показываем CA в шапке, когда он задан
-    if (CONTRACT_ADDRESS && CONTRACT_ADDRESS !== "SOON") {
-      caText.textContent = "CA: " + CONTRACT_ADDRESS.slice(0, 4) + "…" + CONTRACT_ADDRESS.slice(-4);
-    } else {
-      caText.textContent = "CA: soon";
-    }
+      render();
+      img.addEventListener('load', render);
+    })();
   </script>
 </body>
 </html>
