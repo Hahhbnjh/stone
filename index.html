@@ -25,10 +25,12 @@
 
       --navh: 78px;
 
-      --card: rgba(255,255,255,.06);
-      --stroke: rgba(255,255,255,.12);
+      /* how-to-buy clone */
+      --paper:#6f6f73;             /* grey background like screenshot */
+      --ink:#121212;               /* black text */
+      --box:#e9e9e9;               /* light card */
+      --boxStroke:#2a2a2a;         /* dark border */
       --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --radius: 18px;
       --max: 1120px;
     }
 
@@ -46,7 +48,6 @@
         linear-gradient(180deg, var(--bg0), var(--bg1) 45%, var(--bg2));
       overflow-x:hidden;
     }
-
     a{color:inherit; text-decoration:none}
 
     /* NAV (locked) */
@@ -64,11 +65,10 @@
       padding:0 18px;
 
       display:grid;
-      grid-template-columns: auto 1fr auto; /* left | center | right */
+      grid-template-columns: auto 1fr auto;
       align-items:center;
       gap:16px;
     }
-
     .brand{
       display:flex; align-items:center; gap:10px;
       font-weight:900; letter-spacing:.6px;
@@ -93,7 +93,6 @@
       justify-self:center;
       display:flex; align-items:center; justify-content:center;
       gap:22px;
-
       font-weight:800;
       letter-spacing:.14em;
       text-transform:uppercase;
@@ -172,144 +171,70 @@
       object-position: center;
     }
 
-    /* SECTION WRAPPER */
-    .section{
-      padding: 64px 0;
+    /* HOW TO BUY clone section (NO container card, NO right image) */
+    .how{
+      background: var(--paper);
+      color: var(--ink);
+      padding: 34px 0 44px;
     }
-    .container{
+    .how .inner{
       max-width: var(--max);
       margin: 0 auto;
       padding: 0 18px;
     }
 
-    /* HOW TO BUY (green version of the screenshot block) */
-    .howwrap{
-      position:relative;
-      border-radius: 26px;
-      background:
-        radial-gradient(900px 520px at 15% 0%, rgba(51,255,135,.10), transparent 60%),
-        radial-gradient(900px 520px at 85% 15%, rgba(183,255,42,.10), transparent 55%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow: var(--shadow);
-      overflow:hidden;
-    }
-    .howinner{
-      display:grid;
-      grid-template-columns: 1.05fr .95fr;
-      gap: 22px;
-      padding: 34px;
-      align-items: center;
-    }
-
-    .howtitle{
+    .how h2{
+      margin: 8px 0 28px;
+      text-align:center;
       font-weight: 900;
       letter-spacing: .08em;
       text-transform: uppercase;
-      margin: 0 0 18px;
       font-size: 44px;
       line-height: 1;
-      text-shadow: 0 16px 60px rgba(0,0,0,.55);
-    }
-    .howtitle span{
-      color: rgba(234,255,242,.9);
-      background: linear-gradient(135deg, rgba(51,255,135,.95), rgba(183,255,42,.75));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      color: #141414;
+      text-shadow: 0 3px 0 rgba(0,0,0,.12);
     }
 
-    .steps{
+    .grid{
       display:grid;
       grid-template-columns: 1fr 1fr;
-      gap: 14px;
+      gap: 18px 22px;
+      align-items:start;
+      justify-items:start;
     }
 
-    .step{
-      border-radius: 18px;
-      background: rgba(5,11,8,.40);
-      border: 1px solid rgba(255,255,255,.10);
-      padding: 14px 14px 13px;
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
-      position:relative;
-      overflow:hidden;
+    .box{
+      width: 100%;
+      max-width: 420px;
+      background: var(--box);
+      border: 2px solid var(--boxStroke);
+      border-radius: 6px;         /* like screenshot */
+      padding: 14px 16px 12px;
+      box-shadow: 0 10px 18px rgba(0,0,0,.15);
     }
-    .step:before{
-      content:"";
-      position:absolute;
-      inset:-40px -60px auto auto;
-      width:140px; height:140px;
-      background: radial-gradient(circle at 30% 30%, rgba(51,255,135,.18), transparent 65%);
-      transform: rotate(12deg);
-      pointer-events:none;
-    }
-    .step h3{
-      margin:0 0 6px;
-      font-size: 13px;
-      letter-spacing:.10em;
-      text-transform: uppercase;
+    .box h3{
+      margin:0 0 8px;
+      font-size: 14px;
       font-weight: 900;
-      color: rgba(234,255,242,.92);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color:#0f0f0f;
     }
-    .step p{
+    .box p{
       margin:0;
       font-size: 12.5px;
       line-height: 1.35;
-      color: var(--muted);
+      color:#171717;
+      font-weight: 700;
+      text-transform: uppercase;  /* screenshot vibe */
+      letter-spacing: .02em;
     }
-    .num{
-      display:inline-grid;
-      place-items:center;
-      width: 26px; height: 26px;
-      border-radius: 10px;
-      margin-right: 8px;
-      background: linear-gradient(135deg, rgba(51,255,135,.95), rgba(183,255,42,.70));
-      color:#04150c;
-      font-weight: 900;
-      font-size: 12px;
-      border:1px solid rgba(0,0,0,.10);
-      box-shadow: 0 14px 40px rgba(0,0,0,.25);
-    }
-
-    .art{
-      border-radius: 22px;
-      min-height: 420px;
-      border: 1px solid rgba(255,255,255,.10);
-      background:
-        radial-gradient(350px 260px at 70% 35%, rgba(51,255,135,.18), transparent 65%),
-        radial-gradient(420px 320px at 30% 70%, rgba(183,255,42,.14), transparent 60%),
-        linear-gradient(180deg, rgba(5,11,8,.25), rgba(5,11,8,.55));
-      box-shadow: 0 18px 55px rgba(0,0,0,.45);
-      position:relative;
-      overflow:hidden;
-      display:grid;
-      place-items:center;
-    }
-    .art img{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit: cover;
-      object-position: center;
-    }
-
-    /* tiny caption if no image */
-    .art .placeholder{
-      padding: 14px 16px;
-      border-radius: 16px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      color: rgba(234,255,242,.85);
+    .box p .mut{
       font-weight: 800;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      font-size: 12px;
     }
 
-    /* optional: anchor offset so headings aren't hidden by sticky nav */
-    .anchor{
-      position:relative;
-    }
+    /* anchor offset so sticky nav doesn't hide section */
+    .anchor{position:relative}
     .anchor:before{
       content:"";
       display:block;
@@ -319,14 +244,11 @@
 
     @media (max-width: 980px){
       .navlinks{display:none}
-      .howinner{grid-template-columns: 1fr}
-      .art{min-height: 320px}
-      .howtitle{font-size: 38px}
     }
-    @media (max-width: 560px){
-      .steps{grid-template-columns: 1fr}
-      .howtitle{font-size: 34px}
-      .howinner{padding: 22px}
+    @media (max-width: 760px){
+      .how h2{font-size: 38px}
+      .grid{grid-template-columns: 1fr}
+      .box{max-width: 520px}
     }
   </style>
 </head>
@@ -377,62 +299,40 @@
     <img src="hero.jpg" alt="$PEPES main image">
   </main>
 
-  <!-- (kept for menu anchors; you can fill later) -->
-  <section id="about" class="section anchor">
-    <div class="container"></div>
-  </section>
+  <!-- empty anchors (keep if you want menu items not to break) -->
+  <section id="about" class="anchor"></section>
+  <section id="tokenomics" class="anchor"></section>
 
-  <section id="tokenomics" class="section anchor">
-    <div class="container"></div>
-  </section>
+  <!-- COPY of the screenshot block: NO right image, NO fancy container -->
+  <section id="how" class="how anchor">
+    <div class="inner">
+      <h2>HOW TO BUY</h2>
 
-  <!-- ADDED: scroll down -> How To Buy block (green style) -->
-  <section id="how" class="section anchor">
-    <div class="container">
-      <div class="howwrap">
-        <div class="howinner">
-          <div>
-            <h2 class="howtitle"><span>HOW TO BUY</span></h2>
+      <div class="grid">
+        <div class="box">
+          <h3>1. CREATE A WALLET</h3>
+          <p>SIMPLY INSTALL PHANTOM EXTENSION AND CREATE YOUR SOLANA WALLET.</p>
+        </div>
 
-            <div class="steps">
-              <div class="step">
-                <h3><span class="num">1</span>Create a Wallet</h3>
-                <p>Install Phantom (or any Solana wallet) and create your Solana wallet.</p>
-              </div>
+        <div class="box">
+          <h3>2. GET SOME SOL</h3>
+          <p>GO TO COINBASE OR BINANCE OR ANY COIN EXCHANGE OPTION TO BUY SOME SOL AND SEND THEM TO YOUR WALLET.</p>
+        </div>
 
-              <div class="step">
-                <h3><span class="num">2</span>Get Some SOL</h3>
-                <p>Buy SOL on an exchange and send it to your wallet address.</p>
-              </div>
+        <div class="box">
+          <h3>3. GO TO PUMP.FUN</h3>
+          <p>NOW GO TO PUMP.FUN FOR SWAP YOUR SOL ON <span class="mut">$PEPES</span>. CONNECT YOUR WALLET AND BUY <span class="mut">$PEPES</span>.</p>
+        </div>
 
-              <div class="step">
-                <h3><span class="num">3</span>Go to pump.fun</h3>
-                <p>Open pump.fun and connect your wallet.</p>
-              </div>
-
-              <div class="step">
-                <h3><span class="num">4</span>Swap and HODL</h3>
-                <p>Swap SOL for $PEPES and hold tight. Contract: <b>XXX</b>.</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Put your right-side illustration here -->
-          <div class="art">
-            <!-- Option A: use an image (recommended). Put file next to index.html -->
-            <!-- <img src="howto.jpg" alt="How to buy illustration"> -->
-
-            <!-- Option B: placeholder (remove after you add the image) -->
-            <div class="placeholder">PLACE YOUR IMAGE: howto.jpg</div>
-          </div>
+        <div class="box">
+          <h3>4. SWAP AND HODL</h3>
+          <p>SELECT SOL AND COPY AND PASTE <span class="mut">$PEPES</span> CONTRACT ADDRESS AND MAKE THE SWAP. CONTRACT: <span class="mut">XXX</span>.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="join" class="section anchor">
-    <div class="container"></div>
-  </section>
+  <section id="join" class="anchor"></section>
 
 </body>
 </html>
