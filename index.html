@@ -3,603 +3,485 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Tired Trench Trader — Landing</title>
-  <meta name="description" content="The alpha you scroll for. Contract address coming soon." />
+  <meta name="theme-color" content="#0b2b16" />
+  <title>$PEPES — Green Pepe Crypto</title>
+  <meta name="description" content="$PEPES — зелёная мем-крипта в стиле Пепе. Join the pond." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg:#070812;
-      --bg2:#0b0d1e;
-      --card: rgba(255,255,255,.04);
+      --bg0:#06170d;
+      --bg1:#081e11;
+      --card: rgba(255,255,255,.06);
       --stroke: rgba(255,255,255,.10);
       --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.64);
+      --muted: rgba(255,255,255,.72);
 
-      --pink:#ff2bd6;
-      --cyan:#2bf6ff;
-      --violet:#7a5cff;
-      --red:#ff3b6a;
+      --green:#56ff8a;
+      --green2:#20d76d;
+      --lime:#b7ff4a;
 
-      --radius: 18px;
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 22px;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
-      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      color: var(--text);
+      color:var(--text);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       background:
-        radial-gradient(900px 500px at 20% 25%, rgba(255,43,214,.18), transparent 65%),
-        radial-gradient(900px 500px at 80% 35%, rgba(43,246,255,.12), transparent 60%),
-        radial-gradient(700px 600px at 70% 80%, rgba(122,92,255,.12), transparent 60%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
+        radial-gradient(1000px 600px at 20% 10%, rgba(86,255,138,.16), transparent 60%),
+        radial-gradient(900px 650px at 80% 30%, rgba(183,255,74,.12), transparent 60%),
+        radial-gradient(1200px 900px at 50% 90%, rgba(32,215,109,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1));
       overflow-x:hidden;
     }
 
-    /* subtle stars */
-    body:before{
-      content:"";
+    .noise{
+      pointer-events:none;
       position:fixed;
       inset:0;
-      background-image:
-        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,.15), transparent 60%),
-        radial-gradient(1px 1px at 70% 20%, rgba(255,255,255,.12), transparent 60%),
-        radial-gradient(1px 1px at 50% 70%, rgba(255,255,255,.10), transparent 60%),
-        radial-gradient(1px 1px at 90% 60%, rgba(255,255,255,.10), transparent 60%),
-        radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,.12), transparent 60%);
-      opacity:.75;
-      pointer-events:none;
-      mix-blend-mode:screen;
+      opacity:.09;
+      mix-blend-mode:overlay;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+      background-size:220px 220px;
     }
 
-    .container{
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 28px 20px 110px; /* bottom space for fixed BUY */
-      position:relative;
-      z-index:1;
-    }
+    a{ color:inherit; text-decoration:none; }
+    .wrap{ max-width:1120px; margin:0 auto; padding:26px 18px 80px; }
 
-    /* top bar */
-    .topbar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      padding: 14px 16px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.03);
-      border-radius: 16px;
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px;
+      position:sticky; top:0;
+      padding:14px 0;
       backdrop-filter: blur(10px);
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
+      z-index:10;
+    }
+    .nav::before{
+      content:"";
+      position:absolute;
+      inset:-12px -18px;
+      background:linear-gradient(180deg, rgba(6,23,13,.88), rgba(6,23,13,.55), transparent);
+      border-bottom:1px solid rgba(255,255,255,.06);
+      z-index:-1;
     }
 
     .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 220px;
+      display:flex; align-items:center; gap:10px;
+      font-weight:900; letter-spacing:.6px;
+    }
+    .dot{
+      width:12px; height:12px; border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, var(--lime), var(--green2));
+      box-shadow: 0 0 0 6px rgba(86,255,138,.10);
     }
 
-    .logo{
-      width:36px;height:36px;border-radius:12px;
-      background:
-        radial-gradient(18px 18px at 30% 30%, rgba(255,255,255,.35), transparent 60%),
-        linear-gradient(135deg, rgba(255,43,214,.95), rgba(43,246,255,.9));
-      box-shadow: 0 0 0 1px rgba(255,255,255,.10), 0 12px 40px rgba(255,43,214,.18);
+    .pill-row{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--stroke);
+      background: rgba(255,255,255,.04);
+      box-shadow: 0 10px 30px rgba(0,0,0,.18);
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
     }
-
-    .brand h1{
-      font-size: 14px;
-      margin:0;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-weight:800;
-    }
-
-    .brand h1 span{
-      background: linear-gradient(90deg, var(--pink), var(--cyan));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .nav{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      justify-content:flex-end;
-    }
-
-    .chip{
-      padding:10px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--stroke);
-      background: rgba(255,255,255,.03);
-      color: var(--text);
-      text-decoration:none;
-      font-weight:600;
-      font-size: 13px;
-      transition:.2s;
-    }
-    .chip:hover{
+    .pill:hover{
       transform: translateY(-1px);
-      border-color: rgba(255,255,255,.20);
-      background: rgba(255,255,255,.06);
+      border-color: rgba(86,255,138,.34);
+      background: rgba(86,255,138,.08);
     }
+    .pill svg{ width:16px; height:16px; opacity:.9; }
 
-    /* hero */
     .hero{
+      margin-top:20px;
       display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 28px;
-      align-items:center;
-      margin-top: 22px;
+      grid-template-columns: 1.05fr .95fr;
+      gap:22px;
+      align-items:stretch;
     }
-
-    .kicker{
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color: var(--muted);
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      font-size: 12px;
-    }
-
-    .kicker .dot{
-      width:8px;height:8px;border-radius:999px;
-      background: linear-gradient(90deg, var(--pink), var(--cyan));
-      box-shadow: 0 0 18px rgba(255,43,214,.35);
-    }
-
-    .title{
-      margin: 12px 0 10px;
-      font-size: clamp(44px, 6vw, 74px);
-      line-height: .95;
-      letter-spacing: -0.02em;
-      font-weight: 900;
-      text-transform: uppercase;
-    }
-
-    .title .w1{ color: rgba(255,255,255,.92); }
-    .title .w2{
-      background: linear-gradient(90deg, var(--red), var(--pink));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-      text-shadow: 0 16px 70px rgba(255,43,214,.12);
-    }
-    .title .w3{
-      background: linear-gradient(90deg, rgba(255,255,255,.92), rgba(255,255,255,.72));
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
-
-    .subtitle{
-      margin:0 0 18px;
-      max-width: 560px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.55;
+    @media (max-width: 980px){
+      .hero{ grid-template-columns:1fr; }
+      .pill-row{ justify-content:flex-start; }
     }
 
     .card{
-      border: 1px solid var(--stroke);
-      background: var(--card);
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
       border-radius: var(--radius);
-      padding: 16px;
       box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
-    }
-
-    .cardLabel{
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing:.08em;
-      color: rgba(255,255,255,.62);
-      font-weight: 800;
-      margin-bottom: 10px;
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-    .bar{
-      width: 3px;
-      height: 16px;
-      border-radius: 999px;
-      background: linear-gradient(180deg, var(--pink), var(--cyan));
-      box-shadow: 0 0 22px rgba(43,246,255,.16);
-    }
-
-    .addrRow{
-      display:flex;
-      gap: 10px;
-      align-items:center;
-    }
-
-    .addr{
-      flex:1;
-      padding: 12px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(0,0,0,.25);
-      color: rgba(255,255,255,.86);
-      font-weight: 700;
-      font-size: 13px;
       overflow:hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      position:relative;
+    }
+    .card::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background: radial-gradient(520px 260px at 30% 20%, rgba(86,255,138,.18), transparent 60%),
+                  radial-gradient(520px 260px at 70% 60%, rgba(183,255,74,.10), transparent 60%);
+      pointer-events:none;
+      mask: linear-gradient(#000, transparent 70%);
     }
 
-    .iconBtn{
-      width: 44px; height: 44px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,.12);
+    .left{
+      padding:26px 22px;
+    }
+
+    .tag{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:8px 12px;
+      border-radius:999px;
+      background: rgba(86,255,138,.10);
+      border:1px solid rgba(86,255,138,.24);
+      color: rgba(255,255,255,.92);
+      font-weight:700;
+      width:fit-content;
+    }
+    .tag small{ color: rgba(255,255,255,.78); font-weight:600; }
+
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(38px, 5.2vw, 64px);
+      line-height:1.02;
+      letter-spacing:-1.2px;
+    }
+    .grad{
+      background: linear-gradient(90deg, #e8ffe9, var(--lime), var(--green));
+      -webkit-background-clip:text;
+      background-clip:text;
+      color:transparent;
+    }
+
+    .sub{
+      margin:0;
+      font-size: clamp(15px, 1.6vw, 18px);
+      line-height:1.55;
+      color: var(--muted);
+      max-width: 54ch;
+    }
+
+    .cta{
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:12px 16px;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       color: rgba(255,255,255,.92);
-      cursor:pointer;
-      display:grid;
-      place-items:center;
-      transition:.18s;
+      font-weight:800;
+      transition: transform .15s ease, border-color .15s ease, background .15s ease;
+      user-select:none;
     }
-    .iconBtn:hover{
+    .btn:hover{
       transform: translateY(-1px);
-      background: rgba(255,255,255,.07);
-      border-color: rgba(255,255,255,.20);
+      border-color: rgba(86,255,138,.38);
+      background: rgba(86,255,138,.10);
     }
-    .iconBtn:active{ transform: translateY(0px) scale(.98); }
+    .btn.primary{
+      border-color: rgba(86,255,138,.34);
+      background: linear-gradient(180deg, rgba(86,255,138,.20), rgba(86,255,138,.06));
+    }
+    .btn svg{ width:18px; height:18px; opacity:.95; }
 
-    .hint{
-      margin-top: 10px;
-      color: rgba(255,255,255,.55);
-      font-size: 12px;
+    .statgrid{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap:12px;
+    }
+    @media (max-width: 520px){
+      .statgrid{ grid-template-columns:1fr; }
+    }
+    .stat{
+      padding:14px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.14);
+    }
+    .stat b{
+      display:block;
+      font-size:18px;
+      letter-spacing:.2px;
+    }
+    .stat span{
+      display:block;
+      color: rgba(255,255,255,.72);
+      margin-top:6px;
+      font-size:13px;
+      line-height:1.3;
     }
 
-    /* right illustration */
-    .orb{
+    .right{
+      display:flex;
+      flex-direction:column;
+    }
+    .art{
       position:relative;
-      border-radius: 26px;
+      padding:18px;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       min-height: 420px;
-      overflow:hidden;
+      background:
+        radial-gradient(600px 420px at 50% 45%, rgba(0,0,0,.22), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.18), rgba(0,0,0,.06));
+    }
+    .pepe{
+      width:100%;
+      max-width: 560px;
+      height:auto;
+      display:block;
+      border-radius: 18px;
       border: 1px solid rgba(255,255,255,.10);
-      background:
-        radial-gradient(240px 240px at 55% 45%, rgba(43,246,255,.18), transparent 70%),
-        radial-gradient(260px 260px at 45% 55%, rgba(255,43,214,.16), transparent 72%),
-        radial-gradient(420px 420px at 50% 50%, rgba(122,92,255,.12), transparent 70%),
-        rgba(255,255,255,.02);
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(12px);
+      box-shadow: 0 22px 70px rgba(0,0,0,.55);
+      transform: translateZ(0);
     }
-
-    .orb:before{
-      content:"";
+    .glow{
       position:absolute;
-      inset:-120px;
-      background:
-        conic-gradient(from 180deg, rgba(255,43,214,.25), rgba(43,246,255,.20), rgba(122,92,255,.18), rgba(255,43,214,.25));
-      filter: blur(30px);
-      opacity:.45;
-      animation: spin 10s linear infinite;
-    }
-
-    @keyframes spin{
-      from{ transform: rotate(0deg); }
-      to{ transform: rotate(360deg); }
-    }
-
-    .mascot{
-      position:absolute;
-      inset:0;
-      display:grid;
-      place-items:center;
-      padding: 22px;
-      z-index:1;
-    }
-
-    .mascotBox{
-      width:min(320px, 76%);
-      aspect-ratio: 1/1;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
-      background:
-        radial-gradient(70% 70% at 35% 30%, rgba(255,255,255,.08), transparent 65%),
-        radial-gradient(70% 70% at 65% 70%, rgba(0,0,0,.25), transparent 70%),
-        rgba(0,0,0,.22);
-      display:grid;
-      place-items:center;
-      box-shadow: 0 30px 80px rgba(0,0,0,.55);
-      position:relative;
-      overflow:hidden;
-    }
-
-    .mascotBox:after{
-      content:"";
-      position:absolute;
-      inset:-80px;
-      background: radial-gradient(circle at 30% 30%, rgba(43,246,255,.20), transparent 55%),
-                  radial-gradient(circle at 70% 70%, rgba(255,43,214,.18), transparent 55%);
+      inset:auto 10% 8% 10%;
+      height: 110px;
+      background: radial-gradient(closest-side, rgba(86,255,138,.34), transparent);
       filter: blur(18px);
-      opacity:.8;
+      opacity:.9;
       pointer-events:none;
     }
 
-    /* simple CSS mascot */
-    .guy{
-      width: 190px;
-      height: 190px;
-      position:relative;
-      z-index:2;
-      transform: translateY(4px);
-    }
-    .head{
-      position:absolute;
-      top:18px; left:58px;
-      width:78px; height:78px;
-      border-radius: 22px 22px 26px 26px;
-      background: linear-gradient(180deg, rgba(255,255,255,.92), rgba(255,255,255,.82));
-      box-shadow: 0 10px 30px rgba(0,0,0,.25);
-    }
-    .hood{
-      position:absolute;
-      top:62px; left:26px;
-      width:140px; height:120px;
-      border-radius: 30px;
-      background: rgba(255,255,255,.92);
-      box-shadow: 0 18px 50px rgba(0,0,0,.28);
-    }
-    .hood:before{
-      content:"";
-      position:absolute;
-      top:16px; left:22px;
-      width:96px; height:70px;
-      border-radius: 26px;
-      background: rgba(0,0,0,.08);
-    }
-    .phone{
-      position:absolute;
-      right:8px; bottom:18px;
-      width:46px; height:70px;
-      border-radius: 14px;
-      background: linear-gradient(180deg, rgba(15,16,30,.95), rgba(7,8,18,.95));
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+    .section{
+      margin-top:20px;
       display:grid;
-      place-items:center;
-      color: rgba(255,255,255,.92);
-      font-weight:800;
-      font-size: 12px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap:14px;
     }
-    .eyes{
-      position:absolute;
-      top:44px; left:67px;
-      width:60px; height:18px;
-      display:flex;
-      justify-content:space-between;
-      opacity:.9;
+    @media (max-width: 980px){
+      .section{ grid-template-columns:1fr; }
     }
-    .eye{
-      width:24px;height:18px;border-radius: 10px;
-      background: radial-gradient(circle at 40% 40%, rgba(255,43,214,.85), rgba(255,43,214,.35));
-      box-shadow: 0 0 18px rgba(255,43,214,.25);
+    .mini{
+      padding:18px;
     }
-    .mouth{
-      position:absolute;
-      top:70px; left:80px;
-      width:34px;height:10px;border-radius: 999px;
-      background: rgba(255,0,90,.35);
+    .mini h3{
+      margin:0 0 8px;
+      font-size:16px;
+      letter-spacing:.2px;
     }
-    .headphones{
-      position:absolute;
-      top:22px; left:46px;
-      width:102px;height:70px;
-      border-radius: 26px;
-      border: 8px solid rgba(255,255,255,.55);
-      border-bottom-color: transparent;
-      opacity:.8;
+    .mini p{
+      margin:0;
+      color: rgba(255,255,255,.74);
+      line-height:1.55;
+      font-size:14px;
     }
 
-    /* fixed BUY bar */
-    .buyBar{
-      position:fixed;
-      left: 0; right: 0; bottom: 0;
-      z-index: 50;
-      padding: 16px 18px;
-      background: linear-gradient(180deg, rgba(7,8,18,.0), rgba(7,8,18,.75) 40%, rgba(7,8,18,.92));
-      backdrop-filter: blur(10px);
-    }
-
-    .buyInner{
-      max-width: 1120px;
-      margin: 0 auto;
-      display:flex;
-      gap: 12px;
-      align-items:center;
-      justify-content:space-between;
-      border: 1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.03);
-      border-radius: 18px;
-      padding: 12px;
-      box-shadow: 0 18px 60px rgba(0,0,0,.55);
-    }
-
-    .buyLeft{
-      display:flex;
-      flex-direction:column;
-      gap:4px;
-      padding-left: 6px;
-    }
-    .buyLeft .name{
-      font-weight: 900;
-      letter-spacing:.02em;
-    }
-    .buyLeft .sub{
-      color: rgba(255,255,255,.62);
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .buyBtn{
-      border:0;
-      cursor:pointer;
-      padding: 14px 18px;
-      border-radius: 16px;
-      font-weight: 900;
-      letter-spacing:.08em;
-      text-transform: uppercase;
-      color: rgba(10,10,16,.95);
-      background: linear-gradient(90deg, var(--red), var(--pink), var(--cyan));
-      box-shadow: 0 16px 50px rgba(255,43,214,.18);
-      transition: .18s;
-      min-width: 170px;
+    .footer{
+      margin-top:22px;
+      padding:18px;
       text-align:center;
-      text-decoration:none;
-      display:inline-block;
+      color: rgba(255,255,255,.62);
+      border:1px solid rgba(255,255,255,.08);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.03);
     }
-    .buyBtn:hover{ transform: translateY(-1px); }
-    .buyBtn:active{ transform: translateY(0px) scale(.99); }
+    .footer a{
+      color: rgba(255,255,255,.88);
+      border-bottom:1px dashed rgba(86,255,138,.35);
+    }
 
-    /* responsive */
-    @media (max-width: 920px){
-      .hero{ grid-template-columns: 1fr; }
-      .orb{ min-height: 360px; }
-      .nav{ justify-content:flex-start; }
+    .toast{
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,.65);
+      border: 1px solid rgba(255,255,255,.12);
+      color: rgba(255,255,255,.92);
+      padding: 10px 14px;
+      border-radius: 999px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      opacity: 0;
+      pointer-events:none;
+      transition: opacity .18s ease, transform .18s ease;
+      font-weight: 700;
+      letter-spacing:.2px;
+    }
+    .toast.show{
+      opacity: 1;
+      transform: translateX(-50%) translateY(-2px);
     }
   </style>
 </head>
+
 <body>
+  <div class="noise"></div>
 
-  <div class="container">
-    <div class="topbar">
+  <div class="wrap">
+    <header class="nav">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-        <h1>TIRED <span>TRENCH</span> TRADER</h1>
+        <span class="dot"></span>
+        <span>$PEPES</span>
       </div>
 
-      <div class="nav">
-        <a class="chip" href="#" id="xLink">X COMMUNITY</a>
-        <a class="chip" href="#" id="tgLink">TELEGRAM</a>
-        <a class="chip" href="#" id="dexLink">DEX</a>
+      <div class="pill-row">
+        <a class="pill" href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M15.2 2H18l-6.2 7.1L19.6 22h-6.1l-4.8-7.1L2.8 22H0l6.9-7.9L-0.4 2h6.2l4.3 6.3L15.2 2Z" fill="currentColor" opacity=".9"/>
+          </svg>
+          <span>X</span>
+        </a>
+
+        <button class="pill" id="copyBtn" type="button" title="Скопировать контракт">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
+            <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="2" opacity=".9"/>
+          </svg>
+          <span id="caText">CA: soon</span>
+        </button>
       </div>
-    </div>
+    </header>
 
-    <section class="hero">
-      <div>
-        <div class="kicker"><span class="dot"></span> $TTT</div>
-
-        <div class="title">
-          <div class="w1">STONE</div>
-          <div class="w2">COIN</div>
+    <main class="hero">
+      <section class="card left">
+        <div class="tag">
+          <span>🐸</span>
+          <small>Green. Meme. Crypto.</small>
         </div>
 
-        <p class="subtitle">
-          The alpha you scroll for. Contract address coming soon.
+        <h1><span class="grad">$PEPES</span><br/>король зелёного болота</h1>
+        <p class="sub">
+          Мем-токен с вайбом Пепе: зелёный стиль, чистый флекс и максимум внимания в X.
+          Никаких лишних слов — только зелёная энергия.
         </p>
 
-        <div class="card">
-          <div class="cardLabel"><span class="bar"></span> CONTRACT ADDRESS</div>
+        <div class="cta">
+          <a class="btn primary" href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M15.2 2H18l-6.2 7.1L19.6 22h-6.1l-4.8-7.1L2.8 22H0l6.9-7.9L-0.4 2h6.2l4.3 6.3L15.2 2Z" fill="currentColor" opacity=".95"/>
+            </svg>
+            <span>Follow в X</span>
+          </a>
 
-          <div class="addrRow">
-            <div class="addr" id="contract">
-              
-            </div>
+          <a class="btn" href="#about">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V7l-8-4-8 4v5c0 6 8 10 8 10Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
+              <path d="M9.5 12.2 11 13.7 14.8 9.9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" opacity=".9"/>
+            </svg>
+            <span>Про токен</span>
+          </a>
 
-            <button class="iconBtn" id="copyBtn" title="Copy">
-              <!-- copy icon -->
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                <path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="2" />
-                <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="2"/>
-              </svg>
-            </button>
-          </div>
-
-          <div class="hint" id="hint"></div>
+          <button class="btn" type="button" id="copyBtn2">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M9 9h10v10H9V9Z" stroke="currentColor" stroke-width="2" opacity=".9"/>
+              <path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1" stroke="currentColor" stroke-width="2" opacity=".9"/>
+            </svg>
+            <span>Скопировать CA</span>
+          </button>
         </div>
+
+        <div class="statgrid">
+          <div class="stat">
+            <b>🐸 Pepe-style</b>
+            <span>зелёная эстетика, жирный мем-вайб</span>
+          </div>
+          <div class="stat">
+            <b>⚡ Fast hype</b>
+            <span>акцент на комьюнити и X-движ</span>
+          </div>
+          <div class="stat">
+            <b>🟢 Green mode</b>
+            <span>сайт/визуал в одной теме: зелёный</span>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card right">
+        <div class="art">
+          <!-- ВАЖНО:
+               Положи твою основную картинку в репо рядом с index.html и назови "hero.jpg"
+               либо поменяй src ниже на имя файла. -->
+          <img class="pepe" src="hero.jpg" alt="$PEPES main art" />
+          <div class="glow"></div>
+        </div>
+      </aside>
+    </main>
+
+    <section class="section" id="about">
+      <div class="card mini">
+        <h3>🧪 Миссия</h3>
+        <p>Сделать самый зелёный мем-токен, который хочется репостить, держать и шить в сердце.</p>
       </div>
-
-      <div class="orb">
-        <div class="mascot">
-          <div class="mascotBox">
-            <div class="guy" aria-hidden="true">
-              <div class="headphones"></div>
-              <div class="head"></div>
-              <div class="eyes">
-                <div class="eye"></div>
-                <div class="eye"></div>
-              </div>
-              <div class="mouth"></div>
-              <div class="hood"></div>
-              <div class="phone">2%</div>
-            </div>
-          </div>
-        </div>
+      <div class="card mini">
+        <h3>🧩 Комьюнити</h3>
+        <p>Вся сила — в людях. Движ, мемы, рейды и поддержка в X — это наш мотор.</p>
+      </div>
+      <div class="card mini">
+        <h3>🟩 Стиль</h3>
+        <p>Пепе-эстетика, мягкая «ручная» графика, зелёный свет и жирный визуал на первом экране.</p>
       </div>
     </section>
-  </div>
 
-  <!-- FIXED BUY BUTTON -->
-  <div class="buyBar">
-    <div class="buyInner">
-      <div class="buyLeft">
-        <div class="name">Buy $TTT</div>
-        <div class="sub" id="buySub">Buy link not set — put your URL in code</div>
+    <footer class="footer">
+      <div>
+        <span>Официальный X: </span>
+        <a href="https://x.com/pepescoinfun?s=21" target="_blank" rel="noopener">@pepescoinfun</a>
       </div>
-
-      <a class="buyBtn" id="buyBtn" href="#" target="_blank" rel="noreferrer">BUY</a>
-    </div>
+      <div style="margin-top:10px; font-size:12.5px; opacity:.85;">
+        $PEPES — мем-токен. Не является финансовым советом.
+      </div>
+    </footer>
   </div>
+
+  <div class="toast" id="toast">Скопировано ✅</div>
 
   <script>
-    // ====== НАСТРОЙКИ (меняй под себя) ======
-    const CONFIG = {
-      tokenSymbol: "STONE COIN",
-      contract: "XXX",
-      buyUrl: "https://pump.fun/",   // сюда вставь ссылку на покупку (pump.fun / raydium / dex / агрегатор)
-      xUrl: "https://x.com/stonefuncoin",
-      tgUrl: "https://t.me/",
-      dexUrl: "https://dexscreener.com/"
-    };
+    // Поставь сюда контракт, когда будет:
+    const CONTRACT_ADDRESS = "SOON";
 
-    // ====== применяем настройки ======
-    const contractEl = document.getElementById("contract");
-    const hintEl = document.getElementById("hint");
-    const buyBtn = document.getElementById("buyBtn");
-    const buySub = document.getElementById("buySub");
+    const toast = document.getElementById("toast");
+    const caText = document.getElementById("caText");
 
-    const xLink = document.getElementById("xLink");
-    const tgLink = document.getElementById("tgLink");
-    const dexLink = document.getElementById("dexLink");
+    function showToast(msg){
+      toast.textContent = msg;
+      toast.classList.add("show");
+      window.clearTimeout(showToast._t);
+      showToast._t = window.setTimeout(()=>toast.classList.remove("show"), 1200);
+    }
 
-    contractEl.textContent = CONFIG.contract;
-    xLink.href = CONFIG.xUrl;
-    tgLink.href = CONFIG.tgUrl;
-    dexLink.href = CONFIG.dexUrl;
-
-    buyBtn.href = CONFIG.buyUrl;
-    buySub.textContent = CONFIG.buyUrl && CONFIG.buyUrl !== "#"
-      ? "Opens your buy page"
-      : "Buy link not set — put your URL in code";
-
-    // ====== copy contract ======
-    document.getElementById("copyBtn").addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(CONFIG.contract);
-        hintEl.textContent = "Скопировано ✅";
-        setTimeout(() => hintEl.textContent = "Нажми на иконку — адрес скопируется.", 1400);
-      } catch (e) {
-        hintEl.textContent = "Не удалось скопировать (разреши Clipboard).";
-        setTimeout(() => hintEl.textContent = "Нажми на иконку — адрес скопируется.", 1800);
+    function copyCA(){
+      const text = CONTRACT_ADDRESS;
+      if (!text || text === "SOON") {
+        showToast("CA ещё не добавлен");
+        return;
       }
-    });
+      navigator.clipboard.writeText(text)
+        .then(()=>showToast("Скопировано ✅"))
+        .catch(()=>showToast("Не удалось скопировать"));
+    }
+
+    document.getElementById("copyBtn").addEventListener("click", copyCA);
+    document.getElementById("copyBtn2").addEventListener("click", copyCA);
+
+    // UI: показываем CA в шапке, когда он задан
+    if (CONTRACT_ADDRESS && CONTRACT_ADDRESS !== "SOON") {
+      caText.textContent = "CA: " + CONTRACT_ADDRESS.slice(0, 4) + "…" + CONTRACT_ADDRESS.slice(-4);
+    } else {
+      caText.textContent = "CA: soon";
+    }
   </script>
 </body>
 </html>
