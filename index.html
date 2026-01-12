@@ -20,18 +20,15 @@
       --muted: rgba(234,255,242,.70);
 
       --green:#33ff87;
-      --green2:#14c766;
       --acid:#b7ff2a;
 
       --navh: 78px;
 
-      /* how-to-buy clone */
-      --paper:#6f6f73;             /* grey background like screenshot */
-      --ink:#121212;               /* black text */
-      --box:#e9e9e9;               /* light card */
-      --boxStroke:#2a2a2a;         /* dark border */
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --max: 1120px;
+      /* HOW TO BUY (clone look) */
+      --paper:#8d8d8f;      /* grey area */
+      --ink:#121212;        /* title color */
+      --box:#f2f2f2;        /* card bg */
+      --stroke:#2b2b2b;     /* card border */
     }
 
     *{box-sizing:border-box}
@@ -52,7 +49,7 @@
 
     /* NAV (locked) */
     .nav{
-      position:sticky; top:0; z-index:50;
+      position:sticky; top:0; z-index:100;
       height:var(--navh);
       backdrop-filter: blur(12px);
       background: linear-gradient(180deg, rgba(5,11,8,.90), rgba(5,11,8,.55));
@@ -60,15 +57,14 @@
     }
     .nav .row{
       height:100%;
-      max-width:var(--max);
-      margin:0 auto;
+      width:100%;
       padding:0 18px;
-
       display:grid;
       grid-template-columns: auto 1fr auto;
       align-items:center;
       gap:16px;
     }
+
     .brand{
       display:flex; align-items:center; gap:10px;
       font-weight:900; letter-spacing:.6px;
@@ -156,12 +152,13 @@
       border:1px solid rgba(5,11,8,.12);
     }
 
-    /* HERO */
+    /* HERO (kept, image optional) */
     .hero{
       width:100%;
       height: calc(100vh - var(--navh));
       position:relative;
       overflow:hidden;
+      background: rgba(0,0,0,.15);
     }
     .hero img{
       width:100%;
@@ -169,68 +166,6 @@
       display:block;
       object-fit: cover;
       object-position: center;
-    }
-
-    /* HOW TO BUY clone section (NO container card, NO right image) */
-    .how{
-      background: var(--paper);
-      color: var(--ink);
-      padding: 34px 0 44px;
-    }
-    .how .inner{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 0 18px;
-    }
-
-    .how h2{
-      margin: 8px 0 28px;
-      text-align:center;
-      font-weight: 900;
-      letter-spacing: .08em;
-      text-transform: uppercase;
-      font-size: 44px;
-      line-height: 1;
-      color: #141414;
-      text-shadow: 0 3px 0 rgba(0,0,0,.12);
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px 22px;
-      align-items:start;
-      justify-items:start;
-    }
-
-    .box{
-      width: 100%;
-      max-width: 420px;
-      background: var(--box);
-      border: 2px solid var(--boxStroke);
-      border-radius: 6px;         /* like screenshot */
-      padding: 14px 16px 12px;
-      box-shadow: 0 10px 18px rgba(0,0,0,.15);
-    }
-    .box h3{
-      margin:0 0 8px;
-      font-size: 14px;
-      font-weight: 900;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      color:#0f0f0f;
-    }
-    .box p{
-      margin:0;
-      font-size: 12.5px;
-      line-height: 1.35;
-      color:#171717;
-      font-weight: 700;
-      text-transform: uppercase;  /* screenshot vibe */
-      letter-spacing: .02em;
-    }
-    .box p .mut{
-      font-weight: 800;
     }
 
     /* anchor offset so sticky nav doesn't hide section */
@@ -242,13 +177,63 @@
       margin-top: calc((var(--navh) + 14px) * -1);
     }
 
+    /* HOW TO BUY — FULL WIDTH (no max container) */
+    .how{
+      background: var(--paper);
+      color: #151515;
+      padding: 44px clamp(14px, 3.2vw, 46px) 64px;
+    }
+    .how h2{
+      margin: 6px 0 38px;
+      text-align:center;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      font-size: clamp(36px, 4.2vw, 56px);
+      line-height: 1;
+      color: var(--ink);
+      text-shadow: 0 3px 0 rgba(0,0,0,.12);
+    }
+
+    .how-grid{
+      width:100%;
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(16px, 2.3vw, 34px);
+      align-items: stretch;
+    }
+
+    .how-box{
+      width:100%;
+      background: var(--box);
+      border: 2px solid var(--stroke);
+      border-radius: 8px;
+      padding: clamp(18px, 2.4vw, 34px) clamp(18px, 2.6vw, 38px);
+      box-shadow: 0 14px 24px rgba(0,0,0,.22);
+    }
+    .how-box h3{
+      margin:0 0 14px;
+      font-size: clamp(16px, 1.3vw, 20px);
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color:#101010;
+    }
+    .how-box p{
+      margin:0;
+      font-size: clamp(13px, 1.05vw, 16px);
+      font-weight: 800;
+      line-height: 1.45;
+      color:#151515;
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+
     @media (max-width: 980px){
       .navlinks{display:none}
     }
     @media (max-width: 760px){
-      .how h2{font-size: 38px}
-      .grid{grid-template-columns: 1fr}
-      .box{max-width: 520px}
+      .how-grid{grid-template-columns: 1fr}
     }
   </style>
 </head>
@@ -294,40 +279,38 @@
     </div>
   </header>
 
-  <!-- main image full width/height -->
   <main class="hero">
+    <!-- optional hero image -->
     <img src="hero.jpg" alt="$PEPES main image">
   </main>
 
-  <!-- empty anchors (keep if you want menu items not to break) -->
+  <!-- empty anchors for menu -->
   <section id="about" class="anchor"></section>
   <section id="tokenomics" class="anchor"></section>
 
-  <!-- COPY of the screenshot block: NO right image, NO fancy container -->
+  <!-- HOW TO BUY FULL WIDTH + BIG CARDS -->
   <section id="how" class="how anchor">
-    <div class="inner">
-      <h2>HOW TO BUY</h2>
+    <h2>HOW TO BUY</h2>
 
-      <div class="grid">
-        <div class="box">
-          <h3>1. CREATE A WALLET</h3>
-          <p>SIMPLY INSTALL PHANTOM EXTENSION AND CREATE YOUR SOLANA WALLET.</p>
-        </div>
+    <div class="how-grid">
+      <div class="how-box">
+        <h3>1. CREATE A WALLET</h3>
+        <p>SIMPLY INSTALL PHANTOM EXTENSION AND CREATE YOUR SOLANA WALLET.</p>
+      </div>
 
-        <div class="box">
-          <h3>2. GET SOME SOL</h3>
-          <p>GO TO COINBASE OR BINANCE OR ANY COIN EXCHANGE OPTION TO BUY SOME SOL AND SEND THEM TO YOUR WALLET.</p>
-        </div>
+      <div class="how-box">
+        <h3>2. GET SOME SOL</h3>
+        <p>GO TO COINBASE OR BINANCE OR ANY COIN EXCHANGE OPTION TO BUY SOME SOL AND SEND THEM TO YOUR WALLET.</p>
+      </div>
 
-        <div class="box">
-          <h3>3. GO TO PUMP.FUN</h3>
-          <p>NOW GO TO PUMP.FUN FOR SWAP YOUR SOL ON <span class="mut">$PEPES</span>. CONNECT YOUR WALLET AND BUY <span class="mut">$PEPES</span>.</p>
-        </div>
+      <div class="how-box">
+        <h3>3. GO TO PUMP.FUN</h3>
+        <p>NOW GO TO PUMP.FUN FOR SWAP YOUR SOL ON $PEPES. CONNECT YOUR WALLET AND BUY $PEPES.</p>
+      </div>
 
-        <div class="box">
-          <h3>4. SWAP AND HODL</h3>
-          <p>SELECT SOL AND COPY AND PASTE <span class="mut">$PEPES</span> CONTRACT ADDRESS AND MAKE THE SWAP. CONTRACT: <span class="mut">XXX</span>.</p>
-        </div>
+      <div class="how-box">
+        <h3>4. SWAP AND HODL</h3>
+        <p>SELECT SOL AND COPY AND PASTE $PEPES CONTRACT ADDRESS AND MAKE THE SWAP. CONTRACT: XXX.</p>
       </div>
     </div>
   </section>
